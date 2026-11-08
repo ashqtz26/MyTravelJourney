@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Portfolio | Admin</title>
+
+    <link rel="stylesheet" href="admin.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="admin.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <h2>TRAVEL <span>ADMIN</span></h2>
+        <a href="index.html">Back to Website</a>
+    </header>
+
+    <main>
+        <section id="loginSection" class="panel">
+            <h1>Admin Login</h1>
+            <p>Sign in to manage your travel photos.</p>
+
+            <input type="email" id="email" placeholder="Admin email">
+            <input type="password" id="password" placeholder="Password">
+
+            <button id="loginBtn">LOGIN</button>
+            <p id="loginMessage"></p>
+        </section>
+
+        <section id="dashboard" class="panel" hidden>
+            <div class="dashboard-heading">
+                <div>
+                    <h1>Photo Manager</h1>
+                    <p>Manage your travel destinations.</p>
+                </div>
+                <button id="logoutBtn" class="logout">LOGOUT</button>
+            </div>5
+
+            <label for="destinationSelect">Choose Destination</label>
+
+            <select id="destinationSelect">
+                <option value="">Loading destinations...</option>
+            </select>
+
+            <label for="photoFiles">Select Photos</label>
+
+            <div class="upload-area">
+                <input
+                    type="file"
+                    id="photoFiles"
+                    accept="image/jpeg,image/png,image/webp"
+                    multiple
+                >
+                <p>Select multiple photos from your computer.</p>
+            </div>
+
+            <label for="caption">Photo Caption (Optional)</label>
+            <input
+                type="text"
+                id="caption"
+                placeholder="Enter photo description"
+            >
+
+            <button id="uploadBtn">UPLOAD PHOTOS</button>
+
+            <p id="uploadMessage"></p>
+
+            <h2>Uploaded Photos</h2>
+            <div id="adminGallery" class="admin-gallery"></div>
+        </section>
+    </main>
+
+</body>
+</html>

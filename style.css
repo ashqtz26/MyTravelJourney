@@ -1,0 +1,554 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #080b0e;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 30px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: white;
+    text-decoration: none;
+}
+
+.logo span {
+    color: #e9b96e;
+}
+
+nav {
+    display: flex;
+    gap: 35px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+nav a:hover {
+    color: #e9b96e;
+}
+
+.hero {
+    height: 100vh;
+    min-height: 650px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.05);
+    transition: opacity .5s, transform 1.5s;
+    animation: zoom 15s infinite alternate;
+}
+
+@keyframes zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.15); }
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, rgba(0,0,0,.8), transparent 90%),
+        linear-gradient(0deg, #080b0e, transparent 45%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    margin-left: 12%;
+    max-width: 650px;
+}
+
+.subtitle {
+    color: #e9b96e;
+    letter-spacing: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.hero-content h1 {
+    font-size: clamp(65px, 9vw, 115px);
+    line-height: .98;
+    margin: 25px 0;
+    font-weight: 800;
+    letter-spacing: -4px;
+}
+
+.description {
+    color: #ddd;
+    font-size: 14px;
+    line-height: 2;
+    max-width: 450px;
+}
+
+#exploreBtn {
+    margin-top: 35px;
+    background: #e9b96e;
+    border: none;
+    padding: 17px 30px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+#exploreBtn:hover {
+    background: white;
+    transform: translateY(-5px);
+}
+
+.hero-bottom {
+    position: absolute;
+    z-index: 3;
+    bottom: 45px;
+    left: 8%;
+    right: 8%;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+#counter {
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.progress {
+    height: 2px;
+    background: #ffffff55;
+    flex: 1;
+}
+
+#progressBar {
+    width: 16.66%;
+    height: 100%;
+    background: #e9b96e;
+    transition: width .5s;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+}
+
+.controls button {
+    width: 45px;
+    height: 45px;
+    border: 1px solid #ffffff70;
+    background: transparent;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.controls button:hover {
+    background: #e9b96e;
+    color: black;
+}
+
+.destination-label {
+    position: absolute;
+    right: 8%;
+    bottom: 130px;
+    font-size: 12px;
+    letter-spacing: 6px;
+    z-index: 2;
+    color: #ffffffbb;
+}
+
+.hero-content.animate {
+    animation: reveal .8s ease;
+}
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.destinations {
+    padding: 120px 8%;
+}
+
+.section-heading {
+    margin-bottom: 50px;
+}
+
+.section-heading p {
+    color: #e9b96e;
+    letter-spacing: 5px;
+    font-size: 11px;
+}
+
+.section-heading h2 {
+    font-size: 45px;
+    margin-top: 10px;
+}
+
+.destination-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    height: 390px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .7s;
+}
+
+.card:hover img {
+    transform: scale(1.12);
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,.9));
+}
+
+.card-info {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    z-index: 2;
+}
+
+.card-info h3 {
+    font-size: 28px;
+}
+
+.card-info p {
+    font-size: 11px;
+    color: #ddd;
+    letter-spacing: 1px;
+}
+
+.about {
+    background: #151a1e;
+    padding: 120px 12%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.about h2 {
+    font-size: 50px;
+    margin-top: 20px;
+    line-height: 1.2;
+}
+
+.about > p {
+    color: #aaa;
+    font-size: 14px;
+    line-height: 2.2;
+}
+
+footer {
+    padding: 60px 8%;
+    text-align: center;
+}
+
+footer h2 {
+    letter-spacing: 4px;
+    font-size: 22px;
+}
+
+footer p {
+    color: #777;
+    margin-top: 15px;
+    font-size: 11px;
+}
+
+@media(max-width: 768px) {
+    header {
+        padding: 25px 6%;
+    }
+
+    nav {
+        gap: 12px;
+    }
+
+    nav a {
+        font-size: 9px;
+        letter-spacing: 0;
+    }
+
+    .hero-content {
+        margin: 0 8%;
+    }
+
+    .hero-content h1 {
+        font-size: 65px;
+    }
+
+    .destination-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .card {
+        height: 270px;
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+        padding: 80px 8%;
+    }
+
+    .destination-label {
+        display: none;
+    }
+}
+
+@media(max-width: 480px) {
+    .destination-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-content h1 {
+        font-size: 55px;
+    }
+
+    .section-heading h2 {
+        font-size: 34px;
+    }
+
+    .about h2 {
+        font-size: 40px;
+    }
+
+}
+
+/* DESTINATION GALLERIES */
+
+.destination-galleries {
+    display: none;
+    padding: 110px 8%;
+    background: #080b0e;
+    min-height: 100vh;
+}
+
+.destination-galleries.active {
+    display: block;
+    animation: galleryReveal .7s ease;
+}
+
+@keyframes galleryReveal {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#galleryDescription {
+    color: #aaa;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 45px;
+}
+
+.gallery-item {
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    background: #151a1e;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .7s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-item::after {
+    content: "VIEW PHOTO ↗";
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: white;
+    opacity: 0;
+    transition: .4s;
+}
+
+.gallery-item:hover::after {
+    opacity: 1;
+}
+
+.back-button {
+    margin-top: 45px;
+    background: transparent;
+    color: #e9b96e;
+    border: 1px solid #e9b96e;
+    padding: 15px 25px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    font-size: 11px;
+}
+
+.back-button:hover {
+    background: #e9b96e;
+    color: #080b0e;
+}
+
+/* PHOTO VIEWER */
+
+.photo-viewer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0,0,0,.96);
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+.photo-viewer.active {
+    display: flex;
+}
+
+.viewer-content {
+    text-align: center;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.viewer-content img {
+    max-width: 100%;
+    max-height: 78vh;
+    object-fit: contain;
+}
+
+.viewer-content p {
+    color: white;
+    margin-top: 15px;
+    letter-spacing: 3px;
+    font-size: 12px;
+}
+
+.viewer-close,
+.viewer-prev,
+.viewer-next {
+    position: absolute;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.viewer-close {
+    top: 25px;
+    right: 40px;
+}
+
+.viewer-prev {
+    left: 25px;
+}
+
+.viewer-next {
+    right: 25px;
+}
+
+@media(max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .gallery-item {
+        height: 220px;
+    }
+
+    .photo-viewer {
+        padding: 20px;
+    }
+
+    .viewer-prev {
+        left: 5px;
+    }
+
+    .viewer-next {
+        right: 5px;
+    }
+}
+
+@media(max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item {
+        height: 260px;
+    }
+}
+

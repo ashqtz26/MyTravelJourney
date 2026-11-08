@@ -1,0 +1,143 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #080808;
+    color: white;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 8%;
+    border-bottom: 1px solid #292929;
+}
+
+header span {
+    color: #e63946;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 20px;
+}
+
+.panel {
+    background: #151515;
+    border: 1px solid #292929;
+    border-radius: 15px;
+    padding: 35px;
+}
+
+.panel h1 {
+    margin-bottom: 12px;
+}
+
+.panel p {
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+input, select {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0 20px;
+    border: 1px solid #383838;
+    border-radius: 8px;
+    background: #222;
+    color: white;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+button {
+    padding: 15px 25px;
+    background: #e63946;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #b92734;
+}
+
+.logout {
+    background: #333;
+}
+
+.upload-area {
+    border: 2px dashed #555;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.dashboard-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.admin-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.photo-card {
+    background: #222;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.photo-card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+}
+
+.photo-card button {
+    margin: 10px;
+    padding: 10px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+@media(max-width: 600px) {
+    header {
+        padding: 20px;
+    }
+
+    .panel {
+        padding: 20px;
+    }
+
+    .dashboard-heading {
+        align-items: flex-start;
+    }
+}
