@@ -106,12 +106,10 @@ places.forEach((place, index) => {
         </div>
     `;
 
-    card.addEventListener("click", () => {
-        showSlide(index);
-        document.getElementById("home").scrollIntoView({
-            behavior: "smooth"
-        });
-    });
+   card.addEventListener("click", () => {
+    showSlide(index);
+    openDestinationGallery(places[index].name);
+});
 
     grid.appendChild(card);
 });
@@ -211,6 +209,10 @@ let activePhotos = [];
 let activePhoto = 0;
 
 
+
+// Cache gallery records to avoid repeated database queries
+const galleryCache = new Map();
+
 async function openDestinationGallery(name) {
 
     galleryTitle.textContent = name + " GALLERY";
@@ -218,43 +220,46 @@ async function openDestinationGallery(name) {
         "Explore the beautiful moments and places of " + name + ".";
 
     galleryGrid.innerHTML = "<p>Loading photos...</p>";
-
     gallerySection.classList.add("active");
 
     gallerySection.scrollIntoView({
         behavior: "smooth"
     });
 
-    // Get destination photos from Supabase
-    const { data, error } = await supabaseClient
-        .from("destination_photos")
-        .select(`
-            id,
-            image_path,
-            caption,
-            destinations!inner(name)
-        `)
-        .eq("destinations.name", name)
-        .order("created_at", { ascending: false });
+    let data = galleryCache.get(name);
 
-    if (error) {
-        console.error("Gallery Error:", error);
-        galleryGrid.innerHTML =
-            "<p>Unable to load photos. Please try again.</p>";
-        return;
+    // Only query Supabase if this gallery has not been loaded
+    if (!data) {
+
+        const { data: photos, error } = await supabaseClient
+            .from("destination_photos")
+            .select("id, image_path, caption, destinations!inner(name)")
+            .eq("destinations.name", name)
+            .order("created_at", { ascending: false });
+
+        if (error) {
+            console.error("Gallery Error:", error);
+            galleryGrid.innerHTML =
+                "<p>Unable to load photos. Please try again.</p>";
+            return;
+        }
+
+        data = photos || [];
+        galleryCache.set(name, data);
     }
 
     galleryGrid.innerHTML = "";
 
-    if (!data || data.length === 0) {
+    if (data.length === 0) {
         galleryGrid.innerHTML =
             "<p>No photos uploaded for this destination yet.</p>";
+
         activePhotos = [];
         return;
     }
 
-    // Convert Storage paths into public image URLs
     activePhotos = data.map(photo => {
+
         const { data: publicData } = supabaseClient.storage
             .from("travel-photos")
             .getPublicUrl(photo.image_path);
@@ -271,9 +276,13 @@ async function openDestinationGallery(name) {
         item.className = "gallery-item";
 
         const img = document.createElement("img");
-        img.src = photo.url;
+
         img.alt = photo.caption || name + " travel photo";
         img.loading = "lazy";
+        img.decoding = "async";
+        img.fetchPriority = "low";
+
+        img.src = photo.url;
 
         item.appendChild(img);
 
@@ -294,12 +303,6 @@ async function openDestinationGallery(name) {
 }
 
 
-// Connect destination cards
-document.querySelectorAll(".card").forEach((card, index) => {
-    card.addEventListener("click", () => {
-        openDestinationGallery(places[index].name);
-    });
-});
 
 // Back button
 document.getElementById("backGallery").addEventListener("click", () => {

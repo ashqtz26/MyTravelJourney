@@ -4,14 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Travel Journey</title>
+
+    <title>My Travel Journey | ASHJOURNEY</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.5com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
+<!-- HEADER -->
 <header>
     <a href="#" class="logo">ASH<span>JOURNEY</span></a>
+
     <nav>
         <a href="#home">Home</a>
         <a href="#destinations">Destinations</a>
@@ -19,43 +31,71 @@
     </nav>
 </header>
 
+
+<!-- HERO SECTION -->
 <section class="hero" id="home">
+
     <div class="hero-bg" id="heroBg"></div>
     <div class="overlay"></div>
 
     <div class="hero-content">
-        <p class="subtitle" id="subtitle">DISCOVER THE WORLD</p>
-        <h1 id="heroTitle">TRAVEL<br>BEYOND</h1>
+
+        <p class="subtitle" id="subtitle">
+            DISCOVER THE WORLD
+        </p>
+
+        <h1 id="heroTitle">
+            TRAVEL<br>BEYOND
+        </h1>
+
         <p class="description" id="heroDesc">
             Every journey begins with a dream.
             Explore beautiful places and create unforgettable memories.
         </p>
-        <button id="exploreBtn">EXPLORE JOURNEY ↗</button>
+
+        <button id="exploreBtn">
+            EXPLORE JOURNEY ↗
+        </button>
+
     </div>
 
     <div class="hero-bottom">
+
         <span id="counter">01 / 06</span>
+
         <div class="progress">
             <div id="progressBar"></div>
         </div>
+
         <div class="controls">
             <button id="prev">←</button>
             <button id="next">→</button>
         </div>
+
     </div>
 
     <div class="destination-label" id="destinationLabel">
         VIETNAM
     </div>
+
 </section>
 
-<!-- DESTINATION GALLERIES -->
+
+<!-- DESTINATION GALLERY -->
 <section class="destination-galleries" id="travelGallery">
 
     <div class="section-heading">
+
         <p>EXPLORE EVERY MEMORY</p>
-        <h2 id="galleryTitle">Travel Galleries</h2>
-        <p id="galleryDescription">Discover beautiful places around the world.</p>
+
+        <h2 id="galleryTitle">
+            Travel Galleries
+        </h2>
+
+        <p id="galleryDescription">
+            Discover beautiful places around the world.
+        </p>
+
     </div>
 
     <div class="gallery-grid" id="galleryGrid"></div>
@@ -66,50 +106,93 @@
 
 </section>
 
+
 <!-- FULLSCREEN PHOTO VIEWER -->
 <div class="photo-viewer" id="photoViewer">
-    <button class="viewer-close" id="closeViewer">×</button>
-    <button class="viewer-prev" id="viewerPrev">❮</button>
+
+    <button class="viewer-close" id="closeViewer">
+        ×
+    </button>
+
+    <button class="viewer-prev" id="viewerPrev">
+        ❮
+    </button>
 
     <div class="viewer-content">
-        <img id="viewerImage" src="" alt="Travel photo">
+
+        <img
+            id="viewerImage"
+            src=""
+            alt="Travel photo"
+            decoding="async"
+        >
+
         <p id="viewerCaption"></p>
+
     </div>
 
-    <button class="viewer-next" id="viewerNext">❯</button>
+    <button class="viewer-next" id="viewerNext">
+        ❯
+    </button>
+
 </div>
 
 
+<!-- DESTINATIONS -->
 <section class="destinations" id="destinations">
+
     <div class="section-heading">
+
         <p>MORE TRAVEL SOON</p>
+
         <h2>Explore Destinations</h2>
+
     </div>
 
     <div class="destination-grid" id="destinationGrid"></div>
+
 </section>
-5
+
+
+<!-- ABOUT -->
 <section class="about" id="about">
+
     <div>
-        <p class="subtitle">MY TRAVEL STORY</p>
-        <h2>Collect Moments,<br>Not Just Places.</h2>
+
+        <p class="subtitle">
+            MY TRAVEL STORY
+        </p>
+
+        <h2>
+            Collect Moments,<br>
+            Not Just Places.
+        </h2>
+
     </div>
+
     <p>
         Traveling is about discovering new places, experiencing different
         cultures, meeting people, and creating memories that last forever.
         This is my personal travel journey.
     </p>
+
 </section>
 
+
+<!-- FOOTER -->
 <footer>
+
     <h2>THE JOURNEY NEVER ENDS.</h2>
+
     <p>© 2026 MY TRAVEL JOURNEY - ASH</p>
+
 </footer>
 
-<!-- Supabase Library -->
+
+<!-- SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
+<!-- JAVASCRIPT -->
 <script src="script.js"></script>
 
 </body>
