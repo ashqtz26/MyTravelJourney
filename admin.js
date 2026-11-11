@@ -41,82 +41,83 @@ const adminGallery = document.getElementById("adminGallery");
 let dashboardLoading = false;
 let uploading = false;
 
+
+
 // =====================================
-// IMAGE COMPRESSION
+// OPTIMIZED IMAGE COMPRESSION
 // =====================================
 
 async function compressImage(file) {
 
-    return new Promise((resolve, reject) => {
+    const objectURL = URL.createObjectURL(file);
 
-        const objectURL = URL.createObjectURL(file);
+    try {
         const img = new Image();
 
-        img.onload = () => {
-
-            const MAX_SIZE = 1600;
-
-            let width = img.naturalWidth;
-            let height = img.naturalHeight;
-
-            const ratio = Math.min(
-                1,
-                MAX_SIZE / Math.max(width, height)
+        await new Promise((resolve, reject) => {
+            img.onload = resolve;
+            img.onerror = () => reject(
+                new Error("Unable to read selected image.")
             );
+            img.src = objectURL;
+        });
 
-            width = Math.round(width * ratio);
-            height = Math.round(height * ratio);
+        const MAX_SIZE = 1000;
 
-            const canvas = document.createElement("canvas");
+        const ratio = Math.min(
+            1,
+            MAX_SIZE / Math.max(img.naturalWidth, img.naturalHeight)
+        );
 
-            canvas.width = width;
-            canvas.height = height;
+        const width = Math.round(img.naturalWidth * ratio);
+        const height = Math.round(img.naturalHeight * ratio);
 
-            const ctx = canvas.getContext("2d");
+        const canvas = document.createElement("canvas");
 
-            if (!ctx) {
-                URL.revokeObjectURL(objectURL);
-                reject(new Error("Canvas is not supported."));
-                return;
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext("2d");
+
+        if (!ctx) {
+            throw new Error("Canvas is not supported.");
+        }
+
+        ctx.drawImage(img, 0, 0, width, height);
+
+        let blob = await new Promise(resolve => {
+            canvas.toBlob(resolve, "image/webp", 0.55);
+        });
+
+        // Fallback for browsers without WebP support
+        if (!blob || blob.type !== "image/webp") {
+            blob = await new Promise(resolve => {
+                canvas.toBlob(resolve, "image/jpeg", 0.65);
+            });
+        }
+
+        if (!blob) {
+            throw new Error("Image compression failed.");
+        }
+
+        const extension = file.type === "image/webp"
+        ? "webp"
+        : file.type === "image/jpeg"
+            ? "jpg"
+            : "png";
+
+        return new File(
+            [blob],
+            `travel-${Date.now()}.${extension}`,
+            {
+                type: blob.type,
+                lastModified: Date.now()
             }
+        );
 
-            ctx.drawImage(img, 0, 0, width, height);
-
-            canvas.toBlob(blob => {
-
-                URL.revokeObjectURL(objectURL);
-
-                if (!blob) {
-                    reject(new Error("Image compression failed."));
-                    return;
-                }
-
-                // Use the actual returned format.
-                const extension = blob.type === "image/webp"
-                    ? "webp"
-                    : "png";
-
-                const compressedFile = new File(
-                    [blob],
-                    `travel-${Date.now()}.${extension}`,
-                    {
-                        type: blob.type,
-                        lastModified: Date.now()
-                    }
-                );
-
-                resolve(compressedFile);
-
-            }, "image/webp", 0.78);
-        };
-
-        img.onerror = () => {
-            URL.revokeObjectURL(objectURL);
-            reject(new Error("Unable to read selected image."));
-        };
-
-        img.src = objectURL;
-    });
+    } finally {
+        URL.revokeObjectURL(objectURL);
+    }
 }
 
 // =====================================
@@ -352,10 +353,11 @@ async function uploadPhotos() {
             totalOriginalSize += originalFile.size;
             totalCompressedSize += file.size;
 
-            const extension = file.type === "image/webp"
-                ? "webp"
+           const extension = file.type === "image/webp"
+            ? "webp"
+            : file.type === "image/jpeg"
+                ? "jpg"
                 : "png";
-
             const filePath =
                 `${destinationId}/${createFileName()}.${extension}`;
 
