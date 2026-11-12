@@ -206,9 +206,8 @@ const galleryTitle = document.getElementById("galleryTitle");
 const galleryDescription = document.getElementById("galleryDescription");
 
 
-// =====================================
 // OPTIMIZED TRAVEL GALLERY
-// =====================================
+
 
 const PAGE_SIZE = 12;
 
@@ -245,9 +244,7 @@ async function openDestinationGallery(name) {
 }
 
 
-// =====================================
 // LOAD PHOTOS IN SMALL BATCHES
-// =====================================
 
 async function loadMoreGalleryPhotos(requestToken, reset = false) {
 

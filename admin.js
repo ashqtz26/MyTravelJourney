@@ -41,12 +41,7 @@ const adminGallery = document.getElementById("adminGallery");
 let dashboardLoading = false;
 let uploading = false;
 
-
-
-// =====================================
 // OPTIMIZED IMAGE COMPRESSION
-// =====================================
-
 async function compressImage(file) {
 
     const objectURL = URL.createObjectURL(file);
@@ -120,9 +115,8 @@ async function compressImage(file) {
     }
 }
 
-// =====================================
 // HELPER FUNCTIONS
-// =====================================
+
 
 function formatSize(bytes) {
 
@@ -138,9 +132,8 @@ function createFileName() {
     return Date.now() + "-" + Math.random().toString(36).slice(2);
 }
 
-// =====================================
 // LOGIN
-// =====================================
+
 
 loginBtn.addEventListener("click", login);
 
@@ -176,9 +169,8 @@ async function login() {
     }
 }
 
-// =====================================
 // AUTHENTICATION
-// =====================================
+
 
 async function showDashboard() {
 
@@ -244,9 +236,9 @@ async function checkLogin() {
 
 checkLogin();
 
-// =====================================
+
 // LOAD DESTINATIONS
-// =====================================
+
 
 async function loadDestinations() {
 
@@ -292,9 +284,9 @@ async function loadDestinations() {
     });
 }
 
-// =====================================
+
 // UPLOAD PHOTOS
-// =====================================
+
 
 uploadBtn.addEventListener("click", uploadPhotos);
 
@@ -420,9 +412,9 @@ async function uploadPhotos() {
         uploadBtn.disabled = false;
     }
 
-    // =================================
+    
     // UPLOAD SUMMARY
-    // =================================
+   
 
     if (uploadedCount > 0) {
 
@@ -450,9 +442,9 @@ async function uploadPhotos() {
     }
 }
 
-// =====================================
+
 // LOAD ADMIN GALLERY
-// =====================================
+
 
 async function loadAdminPhotos() {
 
@@ -527,9 +519,9 @@ async function loadAdminPhotos() {
     adminGallery.appendChild(fragment);
 }
 
-// =====================================
+
 // DELETE PHOTOS
-// =====================================
+
 
 async function deletePhoto(id, imagePath, button) {
 
